@@ -1,0 +1,33 @@
+{
+  "name": "acervacariocamern",
+  "version": "1.0.0",
+  "description": "Rio de Janeiro's Homebrewers Association",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waldirpereira/acervacariocamern.git"
+  },
+  "keywords": [
+    "homebrew",
+    "mern",
+    "mongo",
+    "mongodb",
+    "expressjs",
+    "node",
+    "nodejs",
+    "react",
+    "reactjs"
+  ],
+  "author": "Waldir J. Pereira Junior and Luiz Fernando Chagas Rodrigues",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/waldirpereira/acervacariocamern/issues"
+  },
+  "homepage": "https://github.com/waldirpereira/acervacariocamern#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
