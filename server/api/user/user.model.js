@@ -19,6 +19,14 @@ var UserSchema = new Schema({
       }
     }
   },
+  address: String,
+  neighborhood: String,
+  city: String,
+  state: String,
+  zip: String,
+  cell: String,
+  phone: String,
+  gender: String,
   role: {
     type: String,
     default: 'user'
