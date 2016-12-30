@@ -1,80 +1,125 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h1>Sign up</h1>
+      <h1>Register-se como associado da ACervA Carioca</h1>
     </div>
     <div class="col-sm-12">
       <form class="form" name="form" ng-submit="vm.register(form)" novalidate>
 
-        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vm.submitted,
-                                            'has-error': form.name.$invalid && vm.submitted }">
-          <label>Name</label>
+        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vm.submitted, 'has-error': form.name.$invalid && vm.submitted }">
+          <label>Nome</label>
+          <input type="text" name="name" class="form-control" ng-model="vm.user.name" required>
+          <p class="help-block" ng-show="form.name.$error.required && vm.submitted">Nome é obrigatório</p>
+        </div>
 
-          <input type="text" name="name" class="form-control" ng-model="vm.user.name"
+        <div class="form-group" ng-class="{ 'has-success': form.email.$valid && vm.submitted, 'has-error': form.email.$invalid && vm.submitted }">
+          <label>E-mail</label>
+          <input type="email" name="email" class="form-control" ng-model="vm.user.email" required mongoose-error>
+          <p class="help-block" ng-show="form.email.$error.email && vm.submitted">Não parece ser um e-mail válido.</p>
+          <p class="help-block" ng-show="form.email.$error.required && vm.submitted">Qual seu endereço de e-mail?</p>
+          <p class="help-block" ng-show="form.email.$error.mongoose">{{ vm.errors.email }}</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.password.$valid && vm.submitted, 'has-error': form.password.$invalid && vm.submitted }">
+          <label>Senha</label>
+          <input type="password" name="password" class="form-control" ng-model="vm.user.password" ng-minlength="3" required mongoose-error>
+          <p class="help-block" ng-show="(form.password.$error.minlength || form.password.$error.required) && vm.submitted">Senha precisa ter ao menos 3 caracteres.</p>
+          <p class="help-block" ng-show="form.password.$error.mongoose">{{ vm.errors.password }}</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.confirmPassword.$valid && vm.submitted, 'has-error': form.confirmPassword.$invalid && vm.submitted }">
+          <label>Confirmação de senha</label>
+          <input type="password" name="confirmPassword" class="form-control" ng-model="vm.user.confirmPassword" match="vm.user.password" ng-minlength="3" required>
+          <p class="help-block" ng-show="form.confirmPassword.$error.match && vm.submitted">A confirmação de senha precisa ser igual à senha.</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.address.$valid && vm.submitted, 'has-error': form.address.$invalid && vm.submitted }">
+          <label>Endereço</label>
+          <input type="text" name="address" class="form-control" ng-model="vm.user.address" required>
+          <p class="help-block" ng-show="form.address.$error.required && vm.submitted">Endereço é obrigatório</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.neighborhood.$valid && vm.submitted, 'has-error': form.neighborhood.$invalid && vm.submitted }">
+          <label>Bairro</label>
+          <input type="text" name="neighborhood" class="form-control" ng-model="vm.user.neighborhood" required>
+          <p class="help-block" ng-show="form.neighborhood.$error.required && vm.submitted">Bairro é obrigatório</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.city.$valid && vm.submitted, 'has-error': form.city.$invalid && vm.submitted }">
+          <label>Cidade</label>
+          <input type="text" name="city" class="form-control" ng-model="vm.user.city" required>
+          <p class="help-block" ng-show="form.city.$error.required && vm.submitted">Cidade é obrigatória</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.state.$valid && vm.submitted, 'has-error': form.state.$invalid && vm.submitted }">
+          <label>Estado</label>
+          <input type="text" name="state" class="form-control" ng-model="vm.user.state" required>
+          <p class="help-block" ng-show="form.state.$error.required && vm.submitted">Estado é obrigatório</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.zip.$valid && vm.submitted, 'has-error': form.zip.$invalid && vm.submitted }">
+          <label>CEP</label>
+          <input type="text" name="zip" class="form-control" ng-model="vm.user.zip" required>
+          <p class="help-block" ng-show="form.zip.$error.required && vm.submitted">CEP é obrigatório</p>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group" ng-class="{ 'has-success': form.cell.$valid && vm.submitted, 'has-error': form.cell.$invalid && vm.submitted }">
+              <label>Celular</label>
+              <input type="text" name="cell" class="form-control" ng-model="vm.user.cell" required>
+              <p class="help-block" ng-show="form.cell.$error.required && vm.submitted">Celular é obrigatório</p>
+            </div>
+          </div>
+            <div class="col-sm-6">
+              <div class="form-group" ng-class="{ 'has-success': form.phone.$valid && vm.submitted, 'has-error': form.phone.$invalid && vm.submitted }">
+                <label>Telefone fixo</label>
+                <input type="text" name="phone" class="form-control" ng-model="vm.user.phone">
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': vm.user.gender && vm.submitted, 'has-error': !vm.user.gender && vm.submitted }">
+          <label>Gênero</label>
+          <div>
+            <input type="radio" name="gender" ng-model="vm.user.gender" value="M"> M
+            <input type="radio" name="gender" ng-model="vm.user.gender" value="F"> F
+          </div>
+          <p class="help-block" ng-show="!vm.user.gender && vm.submitted">Sexo é obrigatório</p>
+        </div>
+
+        <!-- <div class="form-group" ng-class="{ 'has-success': form.FIELD.$valid && vm.submitted,
+                                            'has-error': form.FIELD.$invalid && vm.submitted }">
+          <label>LABEL</label>
+          <input type="text" name="FIELD" class="form-control" ng-model="model"
                  required/>
-          <p class="help-block" ng-show="form.name.$error.required && vm.submitted">
-            A name is required
+          <p class="help-block" ng-show="form.FIELD.$error.required && vm.submitted">
+            LABEL é obrigatório
           </p>
         </div>
 
-        <div class="form-group" ng-class="{ 'has-success': form.email.$valid && vm.submitted,
-                                            'has-error': form.email.$invalid && vm.submitted }">
-          <label>Email</label>
-
-          <input type="email" name="email" class="form-control" ng-model="vm.user.email"
-                 required
-                 mongoose-error/>
-          <p class="help-block" ng-show="form.email.$error.email && vm.submitted">
-            Doesn't look like a valid email.
-          </p>
-          <p class="help-block" ng-show="form.email.$error.required && vm.submitted">
-            What's your email address?
-          </p>
-          <p class="help-block" ng-show="form.email.$error.mongoose">
-            {{ vm.errors.email }}
+        <div class="form-group" ng-class="{ 'has-success': form.FIELD.$valid && vm.submitted,
+                                            'has-error': form.FIELD.$invalid && vm.submitted }">
+          <label>LABEL</label>
+          <input type="text" name="FIELD" class="form-control" ng-model="model"
+                 required/>
+          <p class="help-block" ng-show="form.FIELD.$error.required && vm.submitted">
+            LABEL é obrigatório
           </p>
         </div>
 
-        <div class="form-group" ng-class="{ 'has-success': form.password.$valid && vm.submitted,
-                                            'has-error': form.password.$invalid && vm.submitted }">
-          <label>Password</label>
-
-          <input type="password" name="password" class="form-control" ng-model="vm.user.password"
-                 ng-minlength="3"
-                 required
-                 mongoose-error/>
-          <p class="help-block"
-             ng-show="(form.password.$error.minlength || form.password.$error.required) && vm.submitted">
-            Password must be at least 3 characters.
+        <div class="form-group" ng-class="{ 'has-success': form.FIELD.$valid && vm.submitted,
+                                            'has-error': form.FIELD.$invalid && vm.submitted }">
+          <label>LABEL</label>
+          <input type="text" name="FIELD" class="form-control" ng-model="model"
+                 required/>
+          <p class="help-block" ng-show="form.FIELD.$error.required && vm.submitted">
+            LABEL é obrigatório
           </p>
-          <p class="help-block" ng-show="form.password.$error.mongoose">
-            {{ vm.errors.password }}
-          </p>
-        </div>
+        </div> -->
 
-        <div class="form-group" ng-class="{ 'has-success': form.confirmPassword.$valid && vm.submitted,
-                                            'has-error': form.confirmPassword.$invalid && vm.submitted }">
-          <label>Confirm Password</label>
-          <input type="password" name="confirmPassword" class="form-control" ng-model="vm.user.confirmPassword"
-                 match="vm.user.password"
-                 ng-minlength="3" required/>
-          <p class="help-block"
-             ng-show="form.confirmPassword.$error.match && vm.submitted">
-            Passwords must match.
-          </p>
-        </div>
 
-        <user-field name="address" label="Endereço" model="vm.user.address"></user-field>
-        <user-field name="neighborhood" label="Bairro" model="vm.user.neighborhood"></user-field>
-        <user-field name="city" label="Cidade" model="vm.user.city"></user-field>
-        <user-field name="state" label="Estado" model="vm.user.state"></user-field>
-        <user-field name="zip" label="CEP" model="vm.user.zip"></user-field>
-        <user-field name="cell" label="Celular" model="vm.user.cell"></user-field>
-        <user-field name="phone" label="Telefone" model="vm.user.phone"></user-field>
-        <user-field name="gender" label="Sexo" model="vm.user.gender"></user-field>
 
-</br/>
-</br/>
         <div>
           <button class="btn btn-inverse btn-lg btn-register" type="submit">
             Sign up

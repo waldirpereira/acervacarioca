@@ -1,5 +1,7 @@
 'use strict';
 
+import _ from 'lodash';
+
 class _User {
   _id = '';
   name = '';

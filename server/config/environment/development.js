@@ -7,7 +7,7 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/acervacariocamean-dev'
+    uri: 'mongodb://127.0.0.1/acervacariocamean-dev'
   },
 
   // Seed database on startup
