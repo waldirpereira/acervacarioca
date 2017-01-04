@@ -1,5 +1,16 @@
-'use strict';
+/**
+ * Using Rails-like standard naming convention for endpoints.
+ * GET     /api/users              ->  index
+ * POST    /api/users              ->  create
+ * GET     /api/users/:id          ->  show
+ * PUT     /api/users/:id/edit     ->  update
+ * PATCH   /api/users/:id          ->  patch
+ * DELETE  /api/users/:id          ->  destroy
+ */
 
+ 'use strict';
+
+import _ from 'lodash';
 import User from './user.model';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
@@ -48,7 +59,7 @@ export function create(req, res) {
 }
 
 /**
- * Get a single user
+ * Get profile of a single user
  */
 export function show(req, res, next) {
   var userId = req.params.id;
@@ -59,6 +70,22 @@ export function show(req, res, next) {
         return res.status(404).end();
       }
       res.json(user.profile);
+    })
+    .catch(err => next(err));
+}
+
+/**
+ * Get a single user
+ */
+export function get(req, res, next) {
+  var userId = req.params.id;
+
+  return User.findById(userId, '-salt -password').exec()
+    .then(user => { // don't ever give out the password or salt
+      if(!user) {
+        return res.status(404).end();
+      }
+      res.json(user);
     })
     .catch(err => next(err));
 }
@@ -95,6 +122,23 @@ export function changePassword(req, res) {
       } else {
         return res.status(403).end();
       }
+    });
+}
+
+/**
+ * Edit a user
+ */
+export function edit(req, res) {
+  var userId = req.params.id;
+
+  return User.findById(userId).exec()
+    .then(user => {
+      var updatedUser = _.merge(user, req.body);
+      updatedUser.save()
+        .then(() => {
+          res.status(204).end();
+        })
+        .catch(validationError(res));
     });
 }
 

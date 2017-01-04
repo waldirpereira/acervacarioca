@@ -3,8 +3,8 @@
   <ul class="list-group user-list">
     <li class="list-group-item" ng-repeat="user in admin.users">
 	    <div class="user-info">
-	        <strong>{{user.name}}</strong><br>
-	        <span class="text-muted">{{user.email}}</span>
+	        <strong><a href ui-sref="editUser({userId: user._id})">{{user.name}}</a></strong><br>
+	        <span class="text-muted">{{user.email}}</span> (<span>{{user.role}}</span>)
 	    </div>
         <a ng-click="admin.delete(user)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
     </li>

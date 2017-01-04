@@ -1,0 +1,19 @@
+<div class="container">
+  <form>
+    <div class="row">
+      <strong>{{ctrl.user.name}}</strong><br>
+      <span class="text-muted">{{ctrl.user.email}}</span>
+    </div>
+    <div class="row">
+      <label for="role">Papel</label>
+      <select name="role" id="role" class="form-control input-sm" ng-model="ctrl.user.role">
+        <option ng-repeat="role in ctrl.getRoles()" ng-value="role">
+          {{role}}
+        </option>
+      </select>
+    </div>
+    <div class="row">
+      <input type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.user)" value="Salvar" />
+    </div>
+  </form>
+</div>

@@ -191,6 +191,15 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
     },
 
     /**
+     * Return all roles
+     *
+     * @return {Array}
+     */
+    getRoles() {
+      return userRoles;
+    },
+
+    /**
      * Check if a user is an admin
      *   (synchronous|asynchronous)
      *
